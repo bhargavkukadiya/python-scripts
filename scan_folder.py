@@ -59,7 +59,7 @@ def list_directory(path, include_hidden=False, recursive=False, files_only=False
 
 def main():
     """Parses command-line arguments and prints the directory listing."""
-    parser = argparse.ArgumentParser(description="List files and folders in a directory, with output in JSON format.")
+    parser = argparse.ArgumentParser(description="List files and folders in a directory, with an interactive prompt for the output format.")
     parser.add_argument("folder", help="Path to the folder to be listed.")
     parser.add_argument("-R", "--recursive", action="store_true", help="List subdirectories recursively.")
     parser.add_argument("-H", "--hidden", action="store_true", help="Include hidden files and folders (those starting with a dot).")
@@ -79,8 +79,30 @@ def main():
         files_only=args.files_only
     )
     
-    # Print the final list as a JSON string
-    print(json.dumps(data, indent=2))
+    # If no data, exit early
+    if not data:
+        print("No items found matching the criteria.")
+        return
+
+    # Interactive prompt for output format
+    while True:
+        print("\nPlease select an output format:")
+        print("  1: JSON")
+        print("  2: List")
+        choice = input("Enter your choice (1 or 2): ")
+
+        if choice == '1':
+            print(json.dumps(data, indent=2))
+            break
+        elif choice == '2':
+            for item in data:
+                # Add a prefix to distinguish between files and folders in list view
+                prefix = "[D]" if item['type'] == 'folder' else "[F]"
+                print(f"{prefix} {item['path']}")
+            break
+        else:
+            print("Invalid choice. Please enter 1 or 2.")
+
 
 if __name__ == "__main__":
     main()
