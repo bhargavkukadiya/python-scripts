@@ -1,4 +1,4 @@
-# 📁 File Explorer Script
+# 📁 Scan Folder Script
 
 This Python script allows you to explore a folder and return a list of files and directories in JSON format.
 
