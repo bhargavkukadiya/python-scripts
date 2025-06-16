@@ -1,3 +1,16 @@
+# Compare Dirs Script
+
+This script offers four distinct methods to compare the contents of two directories, with special handling for macOS-specific files like `.DS_Store` and `._*`.
+
+## Usage
+
+Make the script executable and run:
+
+```bash
+chmod +x compare_dirs.sh
+./compare_dirs.sh
+```
+
 # 📁 Scan Folder Script
 
 This Python script allows you to explore a folder and return a list of files and directories in JSON format.
